@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CV</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+              
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            form {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                width: 450px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            h1, h2 {
+                text-align: center;
+            }
+            fieldset {
+                border: 2px solid #ddd;
+                padding: 10px;
+                margin-bottom: 15px;
+                border-radius: 5px;
+                background-color: #fafafa;
+            }
+            input, select, textarea {
+                width: 100%;
+                padding: 8px;
+                margin: 5px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+            input[type="radio"], input[type="checkbox"] {
+                width: auto;
+                margin-right: 5px;
+            }
+            textarea {
+                resize: none;
+            }
+            button {
+                width: 100%;
+                padding: 10px;
+                background: #28a745;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            button:hover {
+                background: #218838;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <h1>HTML FORM</h1>
+            <h2>Personal Info</h2>
+            <fieldset>
+                First Name:
+                <input name="fname" maxlength="20">
+                <br><br>
+                Last Name:
+                <input name="  s slname" maxlength="20">
+                <br><br>
+                Gender:
+                <br>
+                Male <input type="radio" name="gender" value="male">
+                Female <input type="radio" name="gender" value="female">
+                Others <input type="radio" name="gender" value="others">
+                <br><br>
+                Date Of Birth:
+                <input type="date" min="1924-01-01" max="2024-12-31">
+            </fieldset>
+
+            <h2>Contact Info and Address</h2>
+            <fieldset>
+                Contact number:
+                <input type="number" name="phone">
+                <br><br>
+                Address:
+                <br>
+                <textarea rows="5" cols="30"></textarea>
+                <br><br>
+                Pincode:
+                <input type="number" name="pin">
+                <br><br>
+                State:
+                <input name="state" maxlength="20">
+                <br><br>
+                Country:
+                <input name="country" maxlength="20">
+            </fieldset>
+
+            <h2>Interests</h2>
+            <fieldset>
+                Languages Known:
+                <br>
+                English <input type="checkbox" name="Lang" value="English">
+                Hindi <input type="checkbox" name="Lang" value="Hindi">
+                Others <input type="checkbox" name="Lang" value="Others">
+                <br><br>
+                Hobbies:
+                <input type="text" name="hobbies" maxlength="50">
+                <br><br>
+                Favorite Programming Language:
+                <select name="fav_lang">
+                    <option value="C">C</option>
+                    <option value="C++">C++</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="Other">Other</option>
+                </select>
+                <br><br>
+                Preferred Work Mode:
+                <br>
+                Remote <input type="radio" name="work_mode" value="remote">
+                Hybrid <input type="radio" name="work_mode" value="hybrid">
+                On-site <input type="radio" name="work_mode" value="onsite">
+                <br><br>
+                Years of Experience:
+                <input type="number" name="experience" min="0" max="50">
+                <br><br>
+                Upload Resume:
+                <input type="file" name="resume" accept=".pdf, .doc, .docx">
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
