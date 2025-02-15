@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore Tourist Sites</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f9f9;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #ff6f61, #d19e42);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 8px;
+            background-color: #e67e22;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            background-color: #e74c3c;
+            transform: scale(1.1);
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        li {
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <img src="sglogo.png" height="200" width="300" alt="Logo" style="display: block; margin: 20px auto;">
+    <header>
+        <nav>
+            <a href="website.html">Home</a>
+            <a href="herritage.html">Heritage</a>
+            <a href="Hotel.html">Hotel Booking</a>
+            <a href="gallery.html">Gallery</a>
+        </nav>
+    </header>
+    <h1>Top 5 Tourist Sites in Singapore</h1>
+    <ul>
+        <li>
+            <h2>Marina Bay Sands</h2>
+            <img src="mbs.png" alt="Marina Bay Sands">
+        </li>
+        <li>
+            <h2>Gardens by the Bay</h2>
+            <img src="gar.png" alt="Gardens by the Bay">
+        </li>
+        <li>
+            <h2>Sentosa Island</h2>
+            <img src="sentosa.png" alt="Sentosa Island">
+        </li>
+        <li>
+            <h2>Universal Studios Singapore</h2>
+            <img src="uni.png" alt="Universal Studios Singapore">
+        </li>
+        <li>
+            <h2>Singapore Flyer</h2>
+            <img src="flyover.png" alt="Singapore Flyer">
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore Tourist Sites</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f9f9;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #ff6f61, #d19e42);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 8px;
+            background-color: #e67e22;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            background-color: #e74c3c;
+            transform: scale(1.1);
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        a img {
+            all: unset;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 20px auto;
+        }
+        fieldset {
+            border: 2px solid #ddd;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+        textarea {
+            resize: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <img src="sglogo.png" height="200" width="300" alt="Logo" style="display: block; margin: 20px auto;">
+    <header>
+        <nav>
+            <a href="website.html">Home</a>
+            <a href="herritage.html">Heritage</a>
+            <a href="Hotel.html">Hotel Booking</a>
+            <a href="gallery.html">Gallery</a>
+        </nav>
+    </header>
+    <h1>HOTEL BOOKING</h1>
+    <form>
+        <h2>Guest Information</h2>
+        <fieldset>
+            <label>Full Name:</label> <input type="text" name="name" maxlength="50" required>
+            <br><br>
+            <label>Email:</label> <input type="email" name="email" maxlength="50" required>
+            <br><br>
+            <label>Phone Number:</label> <input type="tel" name="phone" maxlength="15" required>
+            <br><br>
+            <label>Date of Birth:</label> <input type="date" name="dob" required>
+            <br><br>
+            <label>Gender:</label> <br>
+            Male <input type="radio" name="gender" value="male" required>
+            Female <input type="radio" name="gender" value="female">
+            Others <input type="radio" name="gender" value="others">
+        </fieldset>
+        <h2>Booking Details</h2>
+        <fieldset>
+            <label>Check-in Date:</label> <input type="date" name="checkin" required>
+            <br><br>
+            <label>Check-out Date:</label> <input type="date" name="checkout" required>
+            <br><br>
+            <label>Room Type:</label> 
+            <select name="room" required>
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="suite">Suite</option>
+            </select>
+            <br><br>
+            <label>Additional Requests:</label> <textarea name="requests" rows="4" placeholder="Any special requests..."></textarea>
+        </fieldset>
+        <button type="submit">Submit Booking</button>
+    </form>
+</body>
+</html>
