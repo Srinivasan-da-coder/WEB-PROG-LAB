@@ -41,7 +41,7 @@
             background-color: #e74c3c;
             transform: scale(1.1);
         }
-        form, .calculator {
+        form {
             background: white;
             padding: 20px;
             border-radius: 8px;
@@ -94,13 +94,6 @@
         </fieldset>
         <button type="submit">Submit Booking</button>
     </form>
-    <div class="calculator">
-        <h2>Simple Calculator</h2>
-        <input type="number" id="num1" placeholder="Enter first number">
-        <input type="number" id="num2" placeholder="Enter second number">
-        <button onclick="calculate()">Calculate</button>
-        <p id="result"></p>
-    </div>
     <script>
         document.getElementById("bookingForm").addEventListener("submit", function(event) {
             let name = document.getElementById("name").value.trim();
@@ -111,12 +104,6 @@
                 event.preventDefault();
             }
         });
-        function calculate() {
-            let num1 = parseFloat(document.getElementById("num1").value) || 0;
-            let num2 = parseFloat(document.getElementById("num2").value) || 0;
-            let sum = num1 + num2;
-            document.getElementById("result").textContent = "Result: " + sum;
-        }
     </script>
 </body>
 </html>
