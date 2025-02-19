@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Managing System</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        #div1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 { 
+            text-align: center;
+            color: black;
+            background-color: beige;
+            text-transform: uppercase;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        h2 {
+            margin: 20px;
+            text-align: center;
+        }
+
+        #div2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 50px;
+            padding: 20px;
+            background-color: pink;
+            width: 300px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        input {
+            text-align: center;
+            margin: 10px 0;
+            padding: 5px;
+            width: 80%;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            background-color: lightblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: deepskyblue;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        li {
+            background: white;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        li:hover {
+            background: lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <h1>Movie Managing System</h1>
+        <div id="div2">
+            <h2>Enter Movies You Like</h2>
+            <input type="text" id="movieInput" placeholder="Enter movie name">
+            <button id="addMovie">ADD MOVIE</button>
+            <button id="clearMovies">CLEAR LIST</button>
+            <ul id="movieList"></ul>
+            <p>Total Movies: <span id="movieCount">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        let movies = [];
+
+        const movieInput = document.getElementById("movieInput");
+        const addMovieBtn = document.getElementById("addMovie");
+        const clearMoviesBtn = document.getElementById("clearMovies");
+        const movieList = document.getElementById("movieList");
+        const movieCount = document.getElementById("movieCount");
+
+        function updateList() {
+            movieList.innerHTML = "";
+            movies.forEach((movie, index) => {
+                let li = document.createElement("li");
+                li.textContent = movie;
+                li.addEventListener("click", () => removeMovie(index));
+                movieList.appendChild(li);
+            });
+            movieCount.textContent = movies.length;
+        }
+
+        function addMovie() {
+            let movieName = movieInput.value.trim();
+            if (movieName === "") return;
+            movies.push(movieName);
+            movieInput.value = "";
+            updateList();
+        }
+
+        function removeMovie(index) {
+            movies.splice(index, 1);
+            updateList();
+        }
+
+        function clearMovies() {
+            movies = [];
+            updateList();
+        }
+
+        addMovieBtn.addEventListener("click", addMovie);
+        clearMoviesBtn.addEventListener("click", clearMovies)
