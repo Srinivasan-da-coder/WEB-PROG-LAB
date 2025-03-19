@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visa Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Visa Application</h2>
+    <form onsubmit="return validateApplication()">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="text" id="passport" placeholder="Passport Number" required>
+      <select id="country" required>
+        <option value="">Select a country</option>
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+        <option value="India">India</option>
+        <option value="UK">UK</option>
+        <option value="Australia">Australia</option>
+      </select>
+      <button type="submit">Apply for Visa</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function validateApplication() {
+      const name = document.getElementById("name").value;
+      const passport = document.getElementById("passport").value;
+      const country = document.getElementById("country").value;
+      let result = "";
+
+      if (!name || !passport || !country) {
+        result = "All fields are required!";
+      } else if (passport.length < 8 || passport.length > 10) {
+        result = "Invalid passport number!";
+      } else {
+        result = "Visa application submitted successfully!";
+      }
+
+      document.getElementById("result").innerText = result;
+      return false; // Prevent form submission for demonstration
+    }
+  </script>
+</body>
+</html>
