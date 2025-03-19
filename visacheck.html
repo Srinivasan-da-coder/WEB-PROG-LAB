@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visa Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Visa Checker</h2>
+    <select id="country">
+      <option value="">Select a country</option>
+      <option value="USA">USA</option>
+      <option value="Canada">Canada</option>
+      <option value="India">India</option>
+      <option value="UK">UK</option>
+      <option value="Australia">Australia</option>
+    </select>
+    <button onclick="checkVisa()">Check Visa</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function checkVisa() {
+      const country = document.getElementById("country").value;
+      let result = "";
+
+      switch (country) {
+        case "USA":
+          result = "Visa required for most applicants.";
+          break;
+        case "Canada":
+          result = "Visa required unless you have an eTA.";
+          break;
+        case "India":
+          result = "Visa required before travel.";
+          break;
+        case "UK":
+          result = "Visa depends on the duration of stay.";
+          break;
+        case "Australia":
+          result = "eVisa available for eligible travelers.";
+          break;
+        default:
+          result = "Please select a country.";
+      }
+
+      document.getElementById("result").innerText = result;
+    }
+  </script>
+</body>
+</html>
