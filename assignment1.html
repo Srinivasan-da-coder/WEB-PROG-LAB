@@ -6,7 +6,6 @@
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f4f4f4;
-              
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -59,24 +58,31 @@
             button:hover {
                 background: #218838;
             }
+            .error {
+                color: red;
+                font-size: 12px;
+            }
         </style>
     </head>
     <body>
-        <form>
+        <form id="cvForm">
             <h1>HTML FORM</h1>
             <h2>Personal Info</h2>
             <fieldset>
                 First Name:
-                <input name="fname" maxlength="20">
+                <input name="fname" id="fname" maxlength="20">
+                <span class="error" id="fnameError"></span>
                 <br><br>
                 Last Name:
-                <input name="  s slname" maxlength="20">
+                <input name="lname" id="lname" maxlength="20">
+                <span class="error" id="lnameError"></span>
                 <br><br>
                 Gender:
                 <br>
                 Male <input type="radio" name="gender" value="male">
                 Female <input type="radio" name="gender" value="female">
                 Others <input type="radio" name="gender" value="others">
+                <span class="error" id="genderError"></span>
                 <br><br>
                 Date Of Birth:
                 <input type="date" min="1924-01-01" max="2024-12-31">
@@ -85,14 +91,16 @@
             <h2>Contact Info and Address</h2>
             <fieldset>
                 Contact number:
-                <input type="number" name="phone">
+                <input type="number" name="phone" id="phone">
+                <span class="error" id="phoneError"></span>
                 <br><br>
                 Address:
                 <br>
                 <textarea rows="5" cols="30"></textarea>
                 <br><br>
                 Pincode:
-                <input type="number" name="pin">
+                <input type="number" name="pin" id="pin">
+                <span class="error" id="pinError"></span>
                 <br><br>
                 State:
                 <input name="state" maxlength="20">
@@ -108,6 +116,7 @@
                 English <input type="checkbox" name="Lang" value="English">
                 Hindi <input type="checkbox" name="Lang" value="Hindi">
                 Others <input type="checkbox" name="Lang" value="Others">
+                <span class="error" id="langError"></span>
                 <br><br>
                 Hobbies:
                 <input type="text" name="hobbies" maxlength="50">
@@ -131,9 +140,83 @@
                 <input type="number" name="experience" min="0" max="50">
                 <br><br>
                 Upload Resume:
-                <input type="file" name="resume" accept=".pdf, .doc, .docx">
+                <input type="file" name="resume" id="resume" accept=".pdf, .doc, .docx">
+                <span class="error" id="resumeError"></span>
             </fieldset>
             <button type="submit">Submit</button>
         </form>
+
+        <script>
+            document.getElementById("cvForm").addEventListener("submit", function(event) {
+                let isValid = true;
+
+                // First Name Validation
+                let fname = document.getElementById("fname").value.trim();
+                if (fname === "") {
+                    document.getElementById("fnameError").innerText = "First name is required";
+                    isValid = false;
+                } else {
+                    document.getElementById("fnameError").innerText = "";
+                }
+
+                // Last Name Validation
+                let lname = document.getElementById("lname").value.trim();
+                if (lname === "") {
+                    document.getElementById("lnameError").innerText = "Last name is required";
+                    isValid = false;
+                } else {
+                    document.getElementById("lnameError").innerText = "";
+                }
+
+                // Gender Validation
+                let genderSelected = document.querySelector('input[name="gender"]:checked');
+                if (!genderSelected) {
+                    document.getElementById("genderError").innerText = "Please select gender";
+                    isValid = false;
+                } else {
+                    document.getElementById("genderError").innerText = "";
+                }
+
+                // Phone Validation (Must be 10 digits)
+                let phone = document.getElementById("phone").value.trim();
+                if (!/^\d{10}$/.test(phone)) {
+                    document.getElementById("phoneError").innerText = "Enter a valid 10-digit phone number";
+                    isValid = false;
+                } else {
+                    document.getElementById("phoneError").innerText = "";
+                }
+
+                // Pincode Validation (Must be 6 digits)
+                let pin = document.getElementById("pin").value.trim();
+                if (!/^\d{6}$/.test(pin)) {
+                    document.getElementById("pinError").innerText = "Enter a valid 6-digit pincode";
+                    isValid = false;
+                } else {
+                    document.getElementById("pinError").innerText = "";
+                }
+
+                // Language Validation
+                let languagesChecked = document.querySelectorAll('input[name="Lang"]:checked').length;
+                if (languagesChecked === 0) {
+                    document.getElementById("langError").innerText = "Select at least one language";
+                    isValid = false;
+                } else {
+                    document.getElementById("langError").innerText = "";
+                }
+
+                // Resume Validation
+                let resume = document.getElementById("resume").value;
+                if (resume === "") {
+                    document.getElementById("resumeError").innerText = "Please upload a resume";
+                    isValid = false;
+                } else {
+                    document.getElementById("resumeError").innerText = "";
+                }
+
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+        </script>
     </body>
 </html>
