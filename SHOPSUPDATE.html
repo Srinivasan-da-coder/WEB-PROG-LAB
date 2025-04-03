@@ -1,62 +1,127 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theme Toggle and Countdown Timer</title>
+    <title>Interactive Features</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <center>
-        <div>
-            <h1 style="color:aliceblue; background-color:black;">DOM</h1>
+    <button id="theme-toggle">Toggle Mode</button>
+    <div class="container">
+        <h1>Countdown Timer</h1>
+        <input type="number" id="time-input" placeholder="Seconds" />
+        <button id="start-btn">Start</button>
+        <button id="pause-btn">Pause</button>
+        <button id="reset-btn">Reset</button>
+        <h3 id="timer-display">00:00</h3>
+    </div>
+    <div>
+        <input type="text" id="list-input" placeholder="Enter item" />
+        <button id="add-item-btn">Add</button>
+        <button id="sort-btn">Sort</button>
+        <button id="remove-duplicates-btn">Remove Duplicates</button>
+        <button id="reverse-btn">Reverse</button>
+        <ul id="item-list"></ul>
+    </div>
+    <div>
+        <input type="text" id="name-input" placeholder="Enter name">
+        <button id="add-row-btn">Add Row</button>
+        <table id="data-table">
+            <thead>
+                <tr><th>Name</th><th>Action</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div>
+        <img src="nature1.jpg" class="thumbnail" width="250px">
+        <img src="car.jpg" class="thumbnail" width="300px">
+        <div id="modal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modal-image">
         </div>
-        <div class="container">
-            <h1>Theme Toggle and Countdown Timer</h1>
-            <button id="theme-toggle">Toggle Dark/Light Mode</button>
-            <div class="timer">
-                <h2>Countdown Timer</h2>
-                <input type="number" id="time-input" placeholder="Enter seconds" />
-                <button id="start-btn">Start</button>
-                <button id="pause-btn">Pause</button>
-                <button id="reset-btn">Reset</button>
-                <h3 id="timer-display">00:00</h3>
-            </div>
-            <div class="list-management">
-                <h2>Manage List</h2>
-                <input type="text" id="list-input" placeholder="Enter item" />
-                <button id="add-item-btn">Add Item</button>
-                <button id="sort-btn">Sort Alphabetically</button>
-                <button id="remove-duplicates-btn">Remove Duplicates</button>
-                <button id="reverse-btn">Reverse Order</button>
-                <ul id="item-list"></ul>
-            </div>
-            <div class="table-management">
-                <h2>Dynamic Table</h2>
-                <input type="text" id="name-input" placeholder="Enter name">
-                <button id="add-row-btn">Add Row</button>
-                <table id="data-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-            <div class="gallery">
-                <h2>Image Gallery</h2>
-                <img src="nature1.jpg" class="thumbnail" alt="Image 1" width="250px">
-                <img src="car.jpg" class="thumbnail" alt="Image 2" width="300px">
-                <div id="modal" class="modal">
-                    <span class="close">&times;</span>
-                    <img class="modal-content" id="modal-image">
-                </div>
-            </div>
-        </div>
-    </center>
-    <script src="script.js"></script>
+    </div>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        if (localStorage.getItem('theme') === 'dark') body.classList.add('dark-mode');
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+        let timer, timeLeft, isPaused = false;
+        document.getElementById('start-btn').addEventListener('click', () => {
+            timeLeft = parseInt(document.getElementById('time-input').value, 10);
+            if (isNaN(timeLeft) || timeLeft <= 0) return;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                if (!isPaused) {
+                    document.body.style.backgroundColor = timeLeft > 10 ? 'green' : timeLeft > 5 ? 'yellow' : 'red';
+                    if (timeLeft <= 0) clearInterval(timer);
+                    else document.getElementById('timer-display').innerText = `00:${timeLeft--}`;
+                }
+            }, 1000);
+        });
+        document.getElementById('pause-btn').addEventListener('click', () => isPaused = !isPaused);
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            clearInterval(timer);
+            document.getElementById('timer-display').innerText = '00:00';
+        });
+        document.getElementById('add-item-btn').addEventListener('click', () => {
+            const listInput = document.getElementById('list-input');
+            if (!listInput.value.trim()) return;
+            const li = document.createElement('li');
+            li.textContent = listInput.value;
+            document.getElementById('item-list').appendChild(li);
+            listInput.value = '';
+        });
+        document.getElementById('sort-btn').addEventListener('click', () => {
+            const items = [...document.getElementById('item-list').children];
+            items.sort((a, b) => a.textContent.localeCompare(b.textContent));
+            document.getElementById('item-list').innerHTML = '';
+            items.forEach(item => document.getElementById('item-list').appendChild(item));
+        });
+        document.getElementById('remove-duplicates-btn').addEventListener('click', () => {
+            const seen = new Set();
+            [...document.getElementById('item-list').children].forEach(item => {
+                if (seen.has(item.textContent)) item.remove();
+                else seen.add(item.textContent);
+            });
+        });
+        document.getElementById('reverse-btn').addEventListener('click', () => {
+            const items = [...document.getElementById('item-list').children].reverse();
+            document.getElementById('item-list').innerHTML = '';
+            items.forEach(item => document.getElementById('item-list').appendChild(item));
+        });
+        document.getElementById('add-row-btn').addEventListener('click', () => {
+            const nameInput = document.getElementById('name-input');
+            if (!nameInput.value.trim()) return;
+            const table = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+            const row = table.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = nameInput.value;
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.addEventListener('click', () => row.remove());
+            cell2.appendChild(deleteBtn);
+            nameInput.value = '';
+        });
+        document.querySelectorAll('.thumbnail').forEach(img => {
+            img.addEventListener('click', function () {
+                document.getElementById('modal').style.display = 'block';
+                document.getElementById('modal-image').src = this.src;
+            });
+        });
+        document.querySelector('.close').addEventListener('click', () => {
+            document.getElementById('modal').style.display = 'none';
+        });
+        window.addEventListener('click', e => {
+            if (e.target == document.getElementById('modal')) {
+                document.getElementById('modal').style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
