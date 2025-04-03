@@ -1,127 +1,156 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Features</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Interactive Webpage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f0f0f0;
+            transition: background 0.5s, color 0.5s;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        #countdown {
+            font-size: 2em;
+            margin: 20px;
+        }
+        .green { background-color: green; }
+        .yellow { background-color: yellow; }
+        .red { background-color: red; }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+        #gallery img {
+            width: 100px;
+            cursor: pointer;
+        }
+        #largeImage {
+            width: 300px;
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
 </head>
 <body>
-    <button id="theme-toggle">Toggle Mode</button>
-    <div class="container">
-        <h1>Countdown Timer</h1>
-        <input type="number" id="time-input" placeholder="Seconds" />
-        <button id="start-btn">Start</button>
-        <button id="pause-btn">Pause</button>
-        <button id="reset-btn">Reset</button>
-        <h3 id="timer-display">00:00</h3>
+    <button id="themeToggle">Toggle Dark Mode</button>
+    
+    <h2>Countdown Timer</h2>
+    <input type="number" id="timerInput" placeholder="Enter seconds">
+    <button onclick="startTimer()">Start</button>
+    <button onclick="pauseTimer()">Pause</button>
+    <button onclick="resetTimer()">Reset</button>
+    <div id="countdown"></div>
+    
+    <h2>Modify List</h2>
+    <ul id="itemList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Orange</li>
+        <li>Banana</li>
+    </ul>
+    <button onclick="sortList()">Sort</button>
+    <button onclick="removeDuplicates()">Remove Duplicates</button>
+    <button onclick="reverseList()">Reverse</button>
+    
+    <h2>Table</h2>
+    <table id="dataTable">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+    </table>
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="number" id="age" placeholder="Enter Age">
+    <button onclick="addRow()">Add Row</button>
+    
+    <h2>Image Gallery</h2>
+    <img id="largeImage" src="" style="display:none">
+    <div id="gallery">
+        <img src="image1.jpg" onclick="showImage(this)">
+        <img src="image2.jpg" onclick="showImage(this)">
+        <img src="image3.jpg" onclick="showImage(this)">
     </div>
-    <div>
-        <input type="text" id="list-input" placeholder="Enter item" />
-        <button id="add-item-btn">Add</button>
-        <button id="sort-btn">Sort</button>
-        <button id="remove-duplicates-btn">Remove Duplicates</button>
-        <button id="reverse-btn">Reverse</button>
-        <ul id="item-list"></ul>
-    </div>
-    <div>
-        <input type="text" id="name-input" placeholder="Enter name">
-        <button id="add-row-btn">Add Row</button>
-        <table id="data-table">
-            <thead>
-                <tr><th>Name</th><th>Action</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div>
-        <img src="nature1.jpg" class="thumbnail" width="250px">
-        <img src="car.jpg" class="thumbnail" width="300px">
-        <div id="modal" class="modal">
-            <span class="close">&times;</span>
-            <img class="modal-content" id="modal-image">
-        </div>
-    </div>
+    
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        if (localStorage.getItem('theme') === 'dark') body.classList.add('dark-mode');
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
         });
-        let timer, timeLeft, isPaused = false;
-        document.getElementById('start-btn').addEventListener('click', () => {
-            timeLeft = parseInt(document.getElementById('time-input').value, 10);
-            if (isNaN(timeLeft) || timeLeft <= 0) return;
-            clearInterval(timer);
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+        
+        let timer, timeLeft;
+        function startTimer() {
+            let input = document.getElementById('timerInput').value;
+            timeLeft = input;
+            updateCountdown();
             timer = setInterval(() => {
-                if (!isPaused) {
-                    document.body.style.backgroundColor = timeLeft > 10 ? 'green' : timeLeft > 5 ? 'yellow' : 'red';
-                    if (timeLeft <= 0) clearInterval(timer);
-                    else document.getElementById('timer-display').innerText = `00:${timeLeft--}`;
-                }
+                timeLeft--;
+                updateCountdown();
+                if (timeLeft <= 0) clearInterval(timer);
             }, 1000);
-        });
-        document.getElementById('pause-btn').addEventListener('click', () => isPaused = !isPaused);
-        document.getElementById('reset-btn').addEventListener('click', () => {
-            clearInterval(timer);
-            document.getElementById('timer-display').innerText = '00:00';
-        });
-        document.getElementById('add-item-btn').addEventListener('click', () => {
-            const listInput = document.getElementById('list-input');
-            if (!listInput.value.trim()) return;
-            const li = document.createElement('li');
-            li.textContent = listInput.value;
-            document.getElementById('item-list').appendChild(li);
-            listInput.value = '';
-        });
-        document.getElementById('sort-btn').addEventListener('click', () => {
-            const items = [...document.getElementById('item-list').children];
-            items.sort((a, b) => a.textContent.localeCompare(b.textContent));
-            document.getElementById('item-list').innerHTML = '';
-            items.forEach(item => document.getElementById('item-list').appendChild(item));
-        });
-        document.getElementById('remove-duplicates-btn').addEventListener('click', () => {
-            const seen = new Set();
-            [...document.getElementById('item-list').children].forEach(item => {
-                if (seen.has(item.textContent)) item.remove();
-                else seen.add(item.textContent);
-            });
-        });
-        document.getElementById('reverse-btn').addEventListener('click', () => {
-            const items = [...document.getElementById('item-list').children].reverse();
-            document.getElementById('item-list').innerHTML = '';
-            items.forEach(item => document.getElementById('item-list').appendChild(item));
-        });
-        document.getElementById('add-row-btn').addEventListener('click', () => {
-            const nameInput = document.getElementById('name-input');
-            if (!nameInput.value.trim()) return;
-            const table = document.getElementById('data-table').getElementsByTagName('tbody')[0];
-            const row = table.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            cell1.textContent = nameInput.value;
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Delete';
-            deleteBtn.addEventListener('click', () => row.remove());
-            cell2.appendChild(deleteBtn);
-            nameInput.value = '';
-        });
-        document.querySelectorAll('.thumbnail').forEach(img => {
-            img.addEventListener('click', function () {
-                document.getElementById('modal').style.display = 'block';
-                document.getElementById('modal-image').src = this.src;
-            });
-        });
-        document.querySelector('.close').addEventListener('click', () => {
-            document.getElementById('modal').style.display = 'none';
-        });
-        window.addEventListener('click', e => {
-            if (e.target == document.getElementById('modal')) {
-                document.getElementById('modal').style.display = 'none';
+        }
+        function pauseTimer() { clearInterval(timer); }
+        function resetTimer() { clearInterval(timer); document.getElementById('countdown').innerText = ''; }
+        function updateCountdown() {
+            let cd = document.getElementById('countdown');
+            cd.innerText = timeLeft;
+            cd.className = timeLeft > 10 ? 'green' : timeLeft > 5 ? 'yellow' : 'red';
+        }
+        
+        function sortList() {
+            let list = document.getElementById('itemList');
+            let items = [...list.children].map(li => li.innerText).sort();
+            list.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+        }
+        function removeDuplicates() {
+            let list = document.getElementById('itemList');
+            let items = [...new Set([...list.children].map(li => li.innerText))];
+            list.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+        }
+        function reverseList() {
+            let list = document.getElementById('itemList');
+            let items = [...list.children].map(li => li.innerText).reverse();
+            list.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+        }
+        
+        function addRow() {
+            let table = document.getElementById('dataTable');
+            let name = document.getElementById('name').value;
+            let age = document.getElementById('age').value;
+            if (name && age) {
+                let row = table.insertRow();
+                row.insertCell(0).innerText = name;
+                row.insertCell(1).innerText = age;
+                let delBtn = document.createElement('button');
+                delBtn.innerText = 'Delete';
+                delBtn.onclick = () => table.deleteRow(row.rowIndex);
+                row.insertCell(2).appendChild(delBtn);
             }
-        });
+        }
+        
+        function showImage(img) {
+            let largeImage = document.getElementById('largeImage');
+            largeImage.src = img.src;
+            largeImage.style.display = 'block';
+        }
     </script>
 </body>
 </html>
