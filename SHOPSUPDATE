@@ -3,291 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apple Store</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #f8f9fa;
-        }
-
-        #main {
-            background-image: url(back.jpg);
-            background-size: cover;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            width: 100%;
-            display: block;
-            padding: 20px;
-        }
-
-        #navbar {
-            height: 100px;
-            width: 100%;
-            background-color: #333;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            align-items: center;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            transition: all 0.5s ease 0s;
-        }
-
-        a:hover {
-            transform: scale(1.1);
-            color: #f0ad4e;
-        }
-
-        #logo {
-            height: 80px;
-            align-self: flex-start;
-        }
-
-        #items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .product {
-            background-color: white;
-            width: 100%;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .product:hover {
-            transform: scale(1.05);
-        }
-
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .info {
-            background-color: #f7f7f7;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        p {
-            color: #333;
-            font-weight: bold;
-        }
-
-        .add {
-            background-color: #28a745;
-            border: none;
-            border-radius: 5px;
-            height: 35px;
-            width: 120px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .add:hover {
-            background-color: #218838;
-        }
-
-        h1 {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-
-        h2 {
-            background-color: rgba(255, 165, 0, 0.8);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 10px auto;
-        }
-
-        #cart-section {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 20px auto;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #cart {
-            margin-top: 10px;
-        }
-
-        #cart ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #cart li {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        #cart li img {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        #cart li p {
-            margin: 0;
-            font-size: 16px;
-        }
-    </style>
+    <title>Theme Toggle and Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div id="navbar">
-            <img src="logo.png" id="logo">
-            <a href="">Locations</a>
-            <a href="">Product Listing</a>
-            <a href="">Shopping Cart</a>
-            <a href="">Contact Us</a>
+    <center>
+        <div>
+            <h1 style="color:aliceblue; background-color:black;">DOM</h1>
         </div>
-    </header>
-    
-    <div id="main">
-        <h1>Welcome to Apple Store</h1>
-        <h2>Product Listings</h2>
-        <div id="items">
-            <div class="product">
-                <img src="16e.jfif">
-                <div class="info">
-                    <p>Iphone 16E</p>
-                    <p>Price: $600</p>
-                    <button type="button" class="add">Add To Cart</button>
-                </div>
+        <div class="container">
+            <h1>Theme Toggle and Countdown Timer</h1>
+            <button id="theme-toggle">Toggle Dark/Light Mode</button>
+            <div class="timer">
+                <h2>Countdown Timer</h2>
+                <input type="number" id="time-input" placeholder="Enter seconds" />
+                <button id="start-btn">Start</button>
+                <button id="pause-btn">Pause</button>
+                <button id="reset-btn">Reset</button>
+                <h3 id="timer-display">00:00</h3>
             </div>
-            <div class="product">
-                <img src="15.jfif">
-                <div class="info">
-                    <p>Iphone 15</p>
-                    <p>Price: $800</p>
-                    <button type="button" class="add">Add To Cart</button>
-                </div>
+            <div class="list-management">
+                <h2>Manage List</h2>
+                <input type="text" id="list-input" placeholder="Enter item" />
+                <button id="add-item-btn">Add Item</button>
+                <button id="sort-btn">Sort Alphabetically</button>
+                <button id="remove-duplicates-btn">Remove Duplicates</button>
+                <button id="reverse-btn">Reverse Order</button>
+                <ul id="item-list"></ul>
             </div>
-            <div class="product">
-                <img src="16.jfif">
-                <div class="info">
-                    <p>Iphone 16</p>
-                    <p>Price: $1200</p>
-                    <button type="button" class="add">Add To Cart</button>
-                </div>
+            <div class="table-management">
+                <h2>Dynamic Table</h2>
+                <input type="text" id="name-input" placeholder="Enter name">
+                <button id="add-row-btn">Add Row</button>
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
-            <div class="product">
-                <img src="14.jfif">
-                <div class="info">
-                    <p>Iphoney 14</p>
-                    <p>Price: $1000</p>
-                    <button type="button" class="add">Add To Cart</button>
+            <div class="gallery">
+                <h2>Image Gallery</h2>
+                <img src="nature1.jpg" class="thumbnail" alt="Image 1" width="250px">
+                <img src="car.jpg" class="thumbnail" alt="Image 2" width="300px">
+                <div id="modal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="modal-image">
                 </div>
-            </div>
-        </div>
-
-        <!-- Shopping Cart Section -->
-        <div id="cart-section">
-            <h2>Shopping Cart</h2>
-            <div id="cart">
-                <p>Your cart is empty.</p>
             </div>
         </div>
-    </div>
-
-    <script>
-        class Product {
-            constructor(id, name, price, image) {
-                this.id = id;
-                this.name = name;
-                this.price = price;
-                this.image = image;
-            }
-        }
-
-        class Cart {
-            constructor() {
-                this.items = [];
-            }
-
-            addItem(product) {
-                const cartItem = {
-                    product: product,
-                    date: new Date().toLocaleString()
-                };
-                this.items.push(cartItem);
-                this.renderCart();
-            }
-
-            renderCart() {
-                const cartElement = document.getElementById('cart');
-                cartElement.innerHTML = '';
-
-                if (this.items.length === 0) {
-                    cartElement.innerHTML = '<p>Your cart is empty.</p>';
-                } else {
-                    const cartList = document.createElement('ul');
-                    this.items.forEach(item => {
-                        const listItem = document.createElement('li');
-                        listItem.innerHTML = 
-                            <img src="${item.product.image}" alt="${item.product.name}" width="50">
-                            ${item.product.name} - $${item.product.price} (Added on: ${item.date})
-                        ;
-                        cartList.appendChild(listItem);
-                    });
-                    cartElement.appendChild(cartList);
-                }
-            }
-        }
-
-        const products = [
-            new Product(1, 'Iphone 16E', 600, '16e.jfif'),
-            new Product(2, 'Iphone 15', 800, '15.jfif'),
-            new Product(3, 'Iphone 16', 1200, '16.jfif'),
-            new Product(4, 'Iphoney 14', 1000, '14.jfif')
-        ];
-
-        const cart = new Cart();
-
-        document.querySelectorAll('.add').forEach((button, index) => {
-            button.addEventListener('click', () => {
-                cart.addItem(products[index]);
-            });
-        });
-
-        cart.renderCart();
-    </script>
+    </center>
+    <script src="script.js"></script>
 </body>
-</html>1. Theme Toggle – Light & Dark Mode (DOM
-Properties & Local Storage)
+</html>
